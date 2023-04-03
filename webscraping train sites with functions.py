@@ -57,7 +57,7 @@ def create_results_URL(url, query):
     #for metcalfe, need another bit after searchterm
     #could be done better, should work for now
     if url[12] == "m":
-        url += "church&post_type=product"
+        url += "&post_type=product"
 
     return url
 
@@ -85,19 +85,20 @@ def find_product(siteURL):
         print(str(j+1) + ": " + productName)
 
     #VALIDATION/VERIFICATION REQUIRED
-    userChoice = int(input("Enter number corresponding to correct item: "))
+    userChoice = int(input("\nEnter number corresponding to correct item: "))
     productURL = resultsElements[userChoice-1].find("a").get("href")
 
     return productURL
 
 
+#NEEDS COMMENTING
 ### ---GET IMAGE---
 #go to item page and download image
 def get_image(itemPageURL):
-    page = req.get(url)
+    page = req.get(itemPageURL)
     htmlData = page.text
     soup = bsoup(htmlData, "html.parser")
-    productImage = soup.find_all("img")[0]
+    productImage = soup.find_all("img")[1]
     name = productImage["alt"]
     link = productImage["src"]
     fileName = "C:\\Users\\44776\\Python\\Image-Scraper-for-Model-Trains\\image storage\\"
@@ -120,17 +121,18 @@ while menuChoice != "0":
           \n1. Peco
           \n2. Gaugemaster
           \n3. Metcalfe
-          \n\n0. EXIT""")
+          \n0. EXIT""")
 
-    menuChoice = input("Enter: ")
+    menuChoice = input("\nEnter: ")
 
     if menuChoice == "0":
-        print("Goodbye")
+        print("\nGoodbye")
     else:#this is not good for validation/verification but will work for now
         chosenSupplier = urlList[int(menuChoice)-1]
         searchTerm = input("\nEnter search term: ")
-        get_image(find_product(create_results_URL(chosenSupplier,searchTerm)))
-        print("Image stored in folder.")#seperate folders for each supplier
+        itemSiteAddress = chosenSupplier + find_product(create_results_URL(chosenSupplier,searchTerm))
+        get_image(itemSiteAddress)
+        print("\nImage stored in folder.\n")#seperate folders for each supplier
 
 
 
