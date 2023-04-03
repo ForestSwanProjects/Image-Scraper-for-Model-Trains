@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup as bsoup
 from datetime import date
 
 
+#   Might want to reconsider this bit. What is the purpose of a records folder?
 ### ---FILE ORGANISATION---
 #NOTES: - file labelling needs refining but works for now
 #       - files only being created, nothing being written yet
@@ -42,6 +43,11 @@ f.close()
 records = open(completeName, "a")
 
 
+### ---SELECT SUPPLIER---
+#user selects supplier to search correct site
+#will act as 'main menu' - more in notes doc.
+
+
 ### ---INPUT SEARCH TERM---
 #put before file org. and incorporate into file name??
 
@@ -55,6 +61,7 @@ for i in query:
         i = "+"
 
 #add search term as query for website to create URL
+#use 'url += query' when url defined in SELECT SUPPLIER
 url = "https://peco-uk.com/search?q=" + query
 
 
@@ -86,8 +93,9 @@ for j in range(3):
 userChoice = int(input("Enter number corresponding to correct item: "))
 productURL = resultsElements[userChoice-1].find("a").get("href")
 
-print(productURL)
-print(" ");
+
+### ---GET IMAGE---
+#go to item page and download image
 
 
 

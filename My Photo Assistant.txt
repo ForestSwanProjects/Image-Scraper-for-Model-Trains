@@ -23,9 +23,9 @@ put final image into folder by manufacturer, notify user where to find it
 
 -------------------
 
-records folder - search terms, results?
+records folder - what is its purpose??
 
-extension - add option to derails system to add photo, use name to search for product
+SELECT SUPPLIER menu - use 'while menuOption not 0' (put sections into functions first)
 
 research - python GUI
 
