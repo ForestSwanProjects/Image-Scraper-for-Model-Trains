@@ -1,0 +1,39 @@
+input product code/name
+
+return image at max 900x900 (.jpeg)
+
+-------------------
+
+select between g'master/metcalfe/peco
+
+search on selected site
+	-if one result, great!
+	-if multiple, select closest
+		-if still multiple, ask user for choice out of top 3
+	-if none, return 'product not found' message
+
+download image - IMAGE HAS TO BE DOWNLOADED FIRST??
+	-if > size limit, reduce size
+
+return image to check with user
+	-if wrong product, ask user to try searching again
+	-if quality not to standard, option to delete
+
+put final image into folder by manufacturer, notify user where to find it
+
+-------------------
+
+records folder - search terms, results?
+
+extension - add option to derails system to add photo, use name to search for product
+
+research - python GUI
+
+temporary image folder to hold images from current search, clear contents before/after new search
+
+-------------------
+
+webscraping - searching + images
+
+image reduction (max 900x900)
+
