@@ -13,7 +13,9 @@ for i in soup.find_all("img"):
     #below copied from https://www.youtube.com/watch?v=stIxEKR7o-c at 8:32
     name = i["alt"]
     link = i["src"]
-    fileName = name.replace(" ", "-").replace("/", "-").replace("*", "") + ".jpg"
+    #not the most efficient but works for now
+    fileName = "C:\\Users\\44776\\Python\\Image-Scraper-for-Model-Trains\\image storage\\"
+    fileName += name.replace(" ", "-").replace("/", "-").replace("*", "") + ".jpg"
     with open(fileName, "wb") as f:
         img = req.get(link)
         f.write(img.content)
