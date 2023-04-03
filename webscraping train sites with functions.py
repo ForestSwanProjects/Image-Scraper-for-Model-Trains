@@ -54,6 +54,11 @@ def create_results_URL(url, query):
     #add query for website to create full search URL
     url += query
 
+    #for metcalfe, need another bit after searchterm
+    #could be done better, should work for now
+    if url[12] == "m":
+        url += "church&post_type=product"
+
     return url
 
 
@@ -88,10 +93,28 @@ def find_product(siteURL):
 
 ### ---GET IMAGE---
 #go to item page and download image
+def get_image(itemPageURL):
+    page = req.get(url)
+    htmlData = page.text
+    soup = bsoup(htmlData, "html.parser")
+    productImage = soup.find_all("img")[0]
+    name = productImage["alt"]
+    link = productImage["src"]
+    fileName = "C:\\Users\\44776\\Python\\Image-Scraper-for-Model-Trains\\image storage\\"
+    fileName += name.replace(" ", "-").replace("/", "-").replace("*", "") + ".jpg"
+    with open(fileName, "wb") as f:
+        img = req.get(link)
+        f.write(img.content)
+    
 
-### ---SELECT SUPPLIER---
-#user selects supplier to search correct site
-#will act as 'main menu' - more in notes doc.
+#list of web addresses ordered as in menu
+#DICTIONARY COULD BE BETTER ALTERNATIVE?
+urlList = ["https://peco-uk.com/search?q=","https://www.gaugemasterretail.com/catalogsearch/result/?q=","https://www.metcalfemodels.com/?s="]
+
+#menu choice variable
+menuChoice = ""
+
+###menu - user selects supplier to search website
 while menuChoice != "0":
     print("""\nMenu:
           \n1. Peco
@@ -104,17 +127,15 @@ while menuChoice != "0":
     if menuChoice == "0":
         print("Goodbye")
     else:#this is not good for validation/verification but will work for now
-        #select url from library based on menu no.
-
-
-
-#MOVE BELOW TO A MENU CHOICE
-searchTerm = input("Enter search term: ")
+        chosenSupplier = urlList[int(menuChoice)-1]
+        searchTerm = input("\nEnter search term: ")
+        get_image(find_product(create_results_URL(chosenSupplier,searchTerm)))
+        print("Image stored in folder.")#seperate folders for each supplier
 
 
 
 
-
+#church&post_type=product
 
 
 
