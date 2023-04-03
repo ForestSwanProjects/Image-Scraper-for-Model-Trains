@@ -59,6 +59,7 @@ url = "https://peco-uk.com/search?q=" + query
 
 
 ### ---WEBSCRAPING TO FIND PRODUCT---
+#returns top 3 results, user selects correct one, go to that link then get image
 #NOTES: - returning product links
 #       - look at 'images to folder with reduction.py' for next bit
 
@@ -73,17 +74,19 @@ siteResults = soup.find(class_="result-rows")
 
 #elements in results container
 resultsElements = siteResults.find_all("div", class_="search--items")
-print(resultsElements)
+#print(resultsElements)
 
-#cycle through results, get name and URL to item page
-for j in resultsElements:
-    productName = j.find("a").getText()
-    productURL = j.find("a").get("href")
-    print(productURL)
+#cycle through results, print name of first 3 results
+for j in range(3):
+    currEl = resultsElements[j]
+    productName = currEl.find("a").getText()
+    print(str(j+1) + ": " + productName)
 
+#VALIDATION/VERIFICATION REQUIRED
+userChoice = int(input("Enter number corresponding to correct item: "))
+productURL = resultsElements[userChoice-1].find("a").get("href")
 
-
-
+print(productURL)
 print(" ");
 
 
